@@ -1,0 +1,29 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+#boilerplateContainer {
+    height: 60vh;
+    resize: none;
+}
+
+.CodeMirror {
+    height: auto !important;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+footer {
+    color: #6c757d;
+}
+
+textarea {
+    outline: none;
+    box-shadow: none;
+}

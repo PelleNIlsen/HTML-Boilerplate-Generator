@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Boilerplate Generator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="A simple HTML boilerplate generator" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/xml/xml.min.js"></script> <!-- Mode for HTML -->
+</head>
+<body class="bg-light">
+    <div id="loader-wrapper" class="bg-light position-fixed z-3 w-100 h-100 text-center">
+        <div class="spinner-border mt-5" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <h1 class="text-center mb-4 text-primary">HTML Boilerplate Generator</h1>
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3>General</h3>
+                        <div class="general mb-3">
+                            <label>
+                            Language:
+                            <select id="language" onchange="updateBoilerplate()">
+                                <option value="af">Afrikaans</option>
+                                <option value="sq">Albanian</option>
+                                <option value="ar">Arabic</option>
+                                <option value="hy">Armenian</option>
+                                <option value="eu">Basque</option>
+                                <option value="bn">Bengali</option>
+                                <option value="bg">Bulgarian</option>
+                                <option value="ca">Catalan</option>
+                                <option value="km">Cambodian</option>
+                                <option value="zh">Chinese</option>
+                                <option value="hr">Croatian</option>
+                                <option value="cs">Czech</option>
+                                <option value="da">Danish</option>
+                                <option value="nl">Dutch</option>
+                                <option value="en" selected>English</option>
+                                <option value="et">Estonian</option>
+                                <option value="fj">Fiji</option>
+                                <option value="fi">Finnish</option>
+                                <option value="fr">French</option>
+                                <option value="ka">Georgian</option>
+                                <option value="de">German</option>
+                                <option value="el">Greek</option>
+                                <option value="gu">Gujuarati</option>
+                                <option value="he">Hebrew</option>
+                                <option value="hi">Hindi</option>
+                                <option value="hu">Hungarian</option>
+                                <option value="is">Icelandic</option>
+                                <option value="id">Indonesian</option>
+                                <option value="ga">Irish</option>
+                                <option value="it">Italian</option>
+                                <option value="ja">Japanese</option>
+                                <option value="jw">Javanese</option>
+                                <option value="ko">Korean</option>
+                                <option value="la">Latin</option>
+                                <option value="lv">Latvian</option>
+                                <option value="lt">Lithuanian</option>
+                                <option value="mk">Macedonian</option>
+                                <option value="ms">Malay</option>
+                                <option value="ml">Malayalam</option>
+                                <option value="mt">Maltese</option>
+                                <option value="mi">Maori</option>
+                                <option value="mr">Marathi</option>
+                                <option value="mn">Mongolian</option>
+                                <option value="ne">Nepali</option>
+                                <option value="no">Norwegian</option>
+                                <option value="fa">Persian</option>
+                                <option value="pl">Polish</option>
+                                <option value="pt">Portugese</option>
+                                <option value="pa">Punjabi</option>
+                                <option value="qu">Quechua</option>
+                                <option value="ro">Romanian</option>
+                                <option value="ru">Russian</option>
+                                <option value="sm">Samoan</option>
+                                <option value="sr">Serbian</option>
+                                <option value="sk">Slovak</option>
+                                <option value="sl">Slovenian</option>
+                                <option value="es">Spanish</option>
+                                <option value="sw">Swahili</option>
+                                <option value="sv">Swedish</option>
+                                <option value="ta">Tamil</option>
+                                <option value="tt">Tatar</option>
+                                <option value="te">Telugu</option>
+                                <option value="th">Thai</option>
+                                <option value="bo">Tibetan</option>
+                                <option value="to">Tonga</option>
+                                <option value="tr">Turkish</option>
+                                <option value="uk">Ukrainian</option>
+                                <option value="ur">Urdu</option>
+                                <option value="uz">Uzbek</option>
+                                <option value="vi">Vietnamese</option>
+                                <option value="cy">Welsh</option>
+                                <option value="xh">Xhosa</option>
+                            </select>
+                            </label><br>
+                            <label>
+                                Page Title:
+                                <input type="text" value="Hello, World!" id="pageTitle" oninput="updateBoilerplate()">
+                            </label><br>
+                            <label>
+                                <input type="checkbox" id="favicons" onchange="updateBoilerplate()">
+                                More Favicons
+                            </label><br>
+                            <label>
+                                <input type="checkbox" id="manifest" onchange="updateBoilerplate()">
+                                Web App Manifest
+                            </label><br>
+                            <label>
+                                <input type="checkbox" id="externalCSS" onchange="updateBoilerplate()">
+                                External CSS Stylesheet
+                            </label><br>
+                            <label>
+                                <input type="checkbox" id="externalJS" onchange="updateBoilerplate()">
+                                External JavaScript File
+                            </label><br>
+                            <label>
+                                <input type="checkbox" id="bootstrapCSS" onchange="updateBoilerplate()">
+                                Include Bootstrap
+                            </label><br>
+                            <label>
+                                <input type="checkbox" id="jQuery" onchange="updateBoilerplate()">
+                                Include jQuery
+                            </label><br>
+                        </div>
+                        <h3>Content</h3>
+                        <div class="content">
+                            <label>
+                                <input type="checkbox" id="topmenu" onchange="updateBoilerplate()">
+                                Top Menu
+                            </label><br>
+                            <small>Top Menu might not currently work with Bootstrap</small><br>
+                            <label>
+                                <input type="checkbox" id="copyright" onchange="updateBoilerplate()">
+                                Copyright Footer
+                            </label><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <textarea id="boilerplateContainer"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-5">
+            <small>© <script>document.write(new Date().getFullYear())</script> Your company name. All Rights Reserved.</small>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+          $("#loader-wrapper").fadeOut(700);
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
